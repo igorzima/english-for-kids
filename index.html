@@ -3,26 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./style/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/style/style.css">
   <title>English for kids</title>
 </head>
 <body>
-  <header>
-    <wrapper>
-      <div class="burger__container" id="burger__container">
-        <div class="burger"></div>
+  <header class="header" id="header">
+    <div class="wrapper header__wrapper">
+      <div class="hamburger" id="hamburger">
+        <span class="hamburger__line"></span>
       </div>
-      <div class="menu">
-        <ul class="nav">
-          <li nav-item><a href="#">Main Page</a></li>
-          <li nav-item><a href="#">Action (set A)</a></li>
-          <li nav-item><a href="#">Action (set B)</a></li>
-          <li nav-item><a href="#">Action (set C)</a></li>
-          <li nav-item><a href="#">Adjective</a></li>
-          <li nav-item><a href="#">Animal (set A)</a></li>
-          <li nav-item><a href="#">Animal (set B)</a></li>
-          <li nav-item><a href="#">Clothes</a></li>
-          <li nav-item><a href="#">Emotion</a></li>
+      <div class="menu" id="menu">
+        <ul class="navigation">
+          <li class="navigation__item">Main Page</li>
+          <li class="navigation__item">Action (set A)</li>
+          <li class="navigation__item">Action (set B)</li>
+          <li class="navigation__item">Action (set C)</li>
+          <li class="navigation__item">Adjective</li>
+          <li class="navigation__item">Animal (set A)</li>
+          <li class="navigation__item">Animal (set B)</li>
+          <li class="navigation__item">Clothes</li>
+          <li class="navigation__item">Emotion</li>
         </ul>
       </div>
       <div class="switcher">
@@ -33,9 +34,9 @@
           <span class="play-mode">Play</span>
         </label>
       </div>
-    </wrapper>
+    </div>
   </header>
 
-  <script src="./script/script.js"></script>
+  <script src="./src/script/script.js"></script>
 </body>
 </html>
