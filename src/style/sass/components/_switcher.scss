@@ -1,5 +1,5 @@
 $height: 50px;
-$deep-blue: $color-train;
+$color: $color-train;
 $speed3: cubic-bezier(0.26, 0.48, 0.08, 0.9);
 
 .language-switcher {
@@ -27,7 +27,7 @@ $speed3: cubic-bezier(0.26, 0.48, 0.08, 0.9);
     position: absolute;
     font-size: #{$height / 2.5};
     top: #{$height / 4};
-    color: #fff;
+    color: $color-light;
     mix-blend-mode: difference;    
   }
   .train-mode {
@@ -46,7 +46,7 @@ $speed3: cubic-bezier(0.26, 0.48, 0.08, 0.9);
   left: 0;
   right: 0;
   bottom: 0;
-  background: $deep-blue;
+  background: $color;
   box-shadow: 0 3px 64px rgba(#1e3470, 0.1);
   -webkit-transition: 0.4s;
   transition: 0.4s;
@@ -59,14 +59,14 @@ $speed3: cubic-bezier(0.26, 0.48, 0.08, 0.9);
   width: 64px;
   left: 4%;    
   top: calc(50% - 22px);
-  background-color: white;
+  background-color: $color-light;
   box-shadow: 0 3px 64px rgba(#1e3470, 0.1);
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: $deep-blue;
+  background-color: $color;
 }
 
 input:focus + .slider {
