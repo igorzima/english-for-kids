@@ -128,9 +128,6 @@ function mainPage() {
 
 mainPage()
 
-
-
-
 const NAVIGATION_LIST = document.querySelectorAll('.navigation__item');
 
 NAVIGATION_LIST.forEach((el) => {

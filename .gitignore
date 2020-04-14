@@ -3,6 +3,7 @@ node_modules
 .babelrc
 .eslintignore
 .eslintrc.js
-.json
+package.json
+package-lock.json
 postcss.config.js
 webpack.config.js
