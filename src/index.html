@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./src/style/style.css">
   <title>English for kids</title>
 </head>
 <body>
@@ -14,21 +13,11 @@
         <span class="hamburger__line"></span>
       </div>
       <div class="menu" id="menu">
-        <ul class="navigation">
-          <li class="navigation__item">Main Page</li>
-          <li class="navigation__item">Action (set A)</li>
-          <li class="navigation__item">Action (set B)</li>
-          <li class="navigation__item">Action (set C)</li>
-          <li class="navigation__item">Adjective</li>
-          <li class="navigation__item">Animal (set A)</li>
-          <li class="navigation__item">Animal (set B)</li>
-          <li class="navigation__item">Clothes</li>
-          <li class="navigation__item">Emotion</li>
-        </ul>
+        <ul class="navigation" id="navigation"></ul>
       </div>
       <div class="switcher">
         <label class="language-switcher">
-          <input type="checkbox">
+          <input type="checkbox" id="check" checked>
           <span class="slider round"></span>
           <span class="train-mode">Train</span>
           <span class="play-mode">Play</span>
@@ -37,11 +26,11 @@
     </div>
   </header>
   <main>
-    <section class="cards">
+    <div class="wrapper">
+      <section class="cards__layout" id="cards">
       
-    </section>
+      </section>
+    </div>
   </main>
-
-  <script src="./src/script/script.js"></script>
 </body>
 </html>

@@ -16,6 +16,7 @@
   transform: translate(-100%, 0);
 
   transition: transform 0.3s linear;
+  z-index: 9;
 }
 
 .menu_active {

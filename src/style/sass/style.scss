@@ -9,7 +9,9 @@
 // Layout
 @import "layout/wrapper";
 @import "layout/header";
+@import "layout/content";
 
 // Components
 @import "components/navigation";
-@import "components/switcher"
+@import "components/switcher";
+@import "components/card";
