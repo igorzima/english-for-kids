@@ -1,7 +1,10 @@
 import '../style/style.css';
 import '../style/sass/style.scss';
 import cards from './cards';
-import createCards from './Card';
+// import createCards from './Card';
+import { createMain } from './Functions';
+import Mode from './Mode';
+
 
 const HAMBURGER = document.getElementById('hamburger');
 const MENU = document.getElementById('menu');
@@ -38,135 +41,54 @@ function createNavigation(arr) {
   }
 }
 
-function createMain(arr) {
-  let div = '';
-  
-  for(let i = 1; i < arr.length; i += 1) {
-    for(let x = 0; x < 1; x += 1) {
-      div += `<div class="main-card train"><img src='${arr[i][x].image}' alt=""><span>${arr[0][i-1]}</span></div>`;
-    }
-  }
 
-  document.getElementById('cards').innerHTML = div;
-  const DIV_MAIN = Array.from(document.getElementsByClassName('main-card'));
-  for(let i = 0; i < DIV_MAIN.length; i += 1) {
-    DIV_MAIN[i].dataset.main = i + 1;
-  }
-}
 
 createMain(cards);
 
 createNavigation(cards);
 
+Mode('train');
 
 
-function cardListener() {
-  const RETURN = document.querySelectorAll('.card');
-
-  RETURN.forEach((el) => {
-    el.addEventListener('click', (event) => {
-      if(event.target.className === 'icon') {
-        el.classList.add('reverse');
-      }
-    })
-
-    el.addEventListener('mouseleave', () => {
-      el.classList.remove('reverse');
-    })
-  })
-
-  const PLAY = document.querySelectorAll('figure');
-
-  PLAY.forEach((el) => {
-    el.addEventListener('click', (event) => {
-      const audio = document.querySelector(`audio[data-key='${el.className}']`);
-
-      if(!(event.target.className === 'icon')) {
-        audio.play();
-      }
-    })
-  })
-}
 
 
-function mainPage() {
-  const DIV_MAIN = Array.from(document.getElementsByClassName('main-card'));
 
-  DIV_MAIN.forEach((el) => {
-    el.addEventListener('click', () => {
-      switch(el.dataset.main) {
-        case  '1':
-          createCards(cards[1]);
-          cardListener();
-          break;
-        case '2':
-          createCards(cards[2]);
-          cardListener();
-          break;
-        case '3':
-          createCards(cards[3]);
-          cardListener();
-          break;
-        case '4':
-          createCards(cards[4]);
-          cardListener();
-          break;
-        case '5':
-          createCards(cards[5]);
-          cardListener();
-          break;
-        case '6':
-          createCards(cards[6]);
-          cardListener();
-          break;
-        default:
-          break;
-      }
-    })
-  })
-}
+document.getElementById('check').addEventListener('click', () => {
+  if(!(document.querySelector('input').checked)) {
+    Mode('play');
+    // console.log(document.querySelector('input').checked)
+    // const button = document.createElement('button');
+    // button.innerText = 'Hello';
+    // document.querySelector('#main__wrapper').appendChild(button);
 
-mainPage()
+    // const audio = document.querySelectorAll('audio');
 
-const NAVIGATION_LIST = document.querySelectorAll('.navigation__item');
+    // const r = function makeRandomArr() {
+    //   return Math.random() - 0.5;
+    // }
+    // const sort = Array.from(audio).sort(r);
 
-NAVIGATION_LIST.forEach((el) => {
-  el.addEventListener('click', () => {
-    MENU.classList.remove('menu_active');
-    MENU.classList.add('menu');
-    HAMBURGER.classList.remove('hamburger_rotate');
+    // const play = function play() {
+    //   sort[sort.length - 1].play();
+    // }
 
-    switch(el.dataset.key) {
-      case '0':
-        createMain(cards);
-        mainPage();
-        break;
-      case  '1':
-        createCards(cards[1]);
-        cardListener();
-        break;
-      case '2':
-        createCards(cards[2]);
-        cardListener();
-        break;
-      case '3':
-        createCards(cards[3]);
-        cardListener();
-        break;
-      case '4':
-        createCards(cards[4]);
-        cardListener();
-        break;
-      case '5':
-        createCards(cards[5]);
-        cardListener();
-        break;
-      case '6':
-        createCards(cards[6]);
-        cardListener();
-        break;
-      default:
-        break;
-    }
-  })
+    // setTimeout(play, 2000);
+
+
+
+    // const GAME = document.querySelectorAll('figure');
+
+    // GAME.forEach(el => {
+    //   el.addEventListener('click', () => {
+    //     if(el.querySelector('audio').dataset === sort[sort.length-1].dataset) {
+    //       setTimeout(play, 2000);
+    //       sort.pop()
+    //     }
+
+    //   })
+    // })
+  } else if (document.querySelector('input').checked) {
+    Mode('train');
+  }
 })
+
