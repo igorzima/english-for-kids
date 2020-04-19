@@ -1,5 +1,5 @@
 const cards = [ 
-  ['Action (set A)', 'Action (set B)', 'Animal (set A)', 'Animal (set B)', 'Clothes', 'Emotions'],
+  ['Action (set A)', 'Action (set B)', 'Animal (set A)', 'Animal (set B)', 'Clothes', 'Emotions', 'Family', 'Fruits'],
   [
     {
       word: 'cry',
@@ -298,6 +298,106 @@ const cards = [
       translation: 'смех',
       image: 'img/laugh.jpg',
       audioSrc: 'audio/laugh.mp3'
+    }
+  ],
+  [
+    {
+      word: 'mother',
+      translation: 'мама',
+      image: 'img/mother.jpg',
+      audioSrc: 'audio/mother.mp3'
+    },
+    {
+      word: 'father',
+      translation: 'папа',
+      image: 'img/father.jpg',
+      audioSrc: 'audio/father.mp3'
+    },
+    {
+      word: 'grandmother',
+      translation: 'бабушка',
+      image: 'img/grandmother.png',
+      audioSrc: 'audio/grandmother.mp3'
+    },
+    {
+      word: 'grandfather',
+      translation: 'дедушка',
+      image: 'img/grandfather.jpg',
+      audioSrc: 'audio/grandfather.mp3'
+    },
+    {
+      word: 'sister',
+      translation: 'сестра',
+      image: 'img/sister.jpg',
+      audioSrc: 'audio/sister.mp3'
+    },
+    {
+      word: 'brother',
+      translation: 'брат',
+      image: 'img/brother.jpg',
+      audioSrc: 'audio/brother.mp3'
+    },
+    {
+      word: 'uncle',
+      translation: 'дядя',
+      image: 'img/uncle.jpg',
+      audioSrc: 'audio/uncle.mp3'
+    },
+    {
+      word: 'aunt',
+      translation: 'тетя',
+      image: 'img/aunt.jpg',
+      audioSrc: 'audio/aunt.mp3'
+    }
+  ],
+  [
+    {
+      word: 'pineapple',
+      translation: 'ананас',
+      image: 'img/pineapple.jpg',
+      audioSrc: 'audio/pineapple.mp3'
+    },
+    {
+      word: 'orange',
+      translation: 'апельсин',
+      image: 'img/orange.jpg',
+      audioSrc: 'audio/orange.mp3'
+    },
+    {
+      word: 'pear',
+      translation: 'груша',
+      image: 'img/pear.jpg',
+      audioSrc: 'audio/pear.mp3'
+    },
+    {
+      word: 'apple',
+      translation: 'яблоко',
+      image: 'img/apple.jpg',
+      audioSrc: 'audio/apple.mp3'
+    },
+    {
+      word: 'mandarin',
+      translation: 'мандарин',
+      image: 'img/mandarin.jpg',
+      audioSrc: 'audio/mandarin.mp3'
+    },
+    {
+      word: 'lemon',
+      translation: 'лимон',
+      image: 'img/lemon.jpg',
+      audioSrc: 'audio/lemon.mp3'
+    },
+    {
+      word: 'kiwi',
+      translation: 'киви',
+      image: 'img/kiwi.jpg',
+      audioSrc: 'audio/kiwi.mp3'
+    },
+    {
+      word: 'mango',
+      translation: 'манго',
+      image: 'img/mango.jpg',
+      audioSrc: 'audio/mango.mp3'
     }
   ]
 ]

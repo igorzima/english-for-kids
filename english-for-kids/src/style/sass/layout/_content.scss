@@ -4,5 +4,17 @@
   grid-row-gap: 100px;
   grid-template-areas: 'a a a a';
   perspective: 1000px;
-  margin-bottom: 100px;
+  margin-bottom: 85px;
+
+  @media (max-width: 1200px) {
+    grid-template-areas: 'a a a';
+  }
+
+  @media (max-width: 1024px) {
+    grid-template-areas: 'a a';
+  }
+
+  @media (max-width: 730px) {
+    grid-template-areas: 'a';
+  }
 }

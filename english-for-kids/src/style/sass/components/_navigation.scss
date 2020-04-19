@@ -9,6 +9,10 @@
   height: 100vh;
 
   background: $color-play;
+
+  @media (max-width: 360px) {
+    width: 320px;
+  }
 }
 
 .menu {
@@ -50,4 +54,16 @@
   &:hover {
     text-decoration: underline;
   }
+}
+
+.active {
+  color: #FF8000;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.active_play {
+  color: #ff0000;
+  font-weight: 500;
+  text-decoration: underline;
 }

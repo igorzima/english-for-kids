@@ -16,6 +16,11 @@
   cursor: pointer;
   -webkit-transition: 0.3s;
   transition: 0.3s;
+
+  &:hover {
+    transform: translateY(-30px);
+    box-shadow: 0px 7px 5px 1px rgb(78, 78, 80);
+  }
 }
 
 .train {

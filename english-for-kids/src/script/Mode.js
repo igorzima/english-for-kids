@@ -1,4 +1,3 @@
-// import cards from './cards';
 import {cardListener, mainPage, navigation} from './Functions';
 
 

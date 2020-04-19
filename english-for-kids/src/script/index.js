@@ -2,8 +2,7 @@
 // import '../style/style.css';
 import '../style/sass/style.scss';
 import cards from './cards';
-// import createCards from './Card';
-import { createMainTrain, createButton, startGame, } from './Functions';
+import { createMain, createButton, startGame } from './Functions';
 import Mode from './Mode';
 
 
@@ -34,7 +33,7 @@ HAMBURGER.addEventListener('click', () => {
 
 
 function createNavigation(arr) {
-  let li = `<li class='navigation__item'>Main Page</li>`;
+  let li = `<li class='navigation__item active'>Main Page</li>`;
   
   arr[0].map((e) => {
     li += `<li class='navigation__item'>${e}</li>`;
@@ -49,8 +48,22 @@ function createNavigation(arr) {
   }
 }
 
+NAVIGATION.addEventListener('click', (event) => {
+  const NAVIGATION_LIST = document.querySelectorAll('.navigation__item');
 
-createMainTrain(cards);
+  if(document.querySelector('input').checked) {
+    NAVIGATION_LIST.forEach(el => el.classList.remove('active'));
+    NAVIGATION_LIST.forEach(el => el.classList.remove('active_play'));
+    event.target.classList.add('active')
+  } else {
+    NAVIGATION_LIST.forEach(el => el.classList.remove('active'));
+    NAVIGATION_LIST.forEach(el => el.classList.remove('active_play'));
+    event.target.classList.add('active_play');
+  }
+})
+
+
+createMain(cards, 'train');
 
 createNavigation(cards);
 
@@ -72,6 +85,7 @@ document.getElementById('check').addEventListener('click', () => {
   if(!(document.querySelector('input').checked)) {
     Mode('play');
     sessionStorage.setItem('mode', 'play');
+    document.getElementById('navigation').style.color = '#000000';
 
     if (document.querySelector('#cards').classList.contains('set')) {
       if(!document.getElementById('button')) {
@@ -86,10 +100,16 @@ document.getElementById('check').addEventListener('click', () => {
       key.classList.remove('train');
     }
 
-    document.querySelectorAll('figcaption').forEach((el) => el.style.display = 'none');
+    document.querySelectorAll('figcaption').forEach(function(e) {
+      e.style.display = 'none';
+    });
   } else if (document.querySelector('input').checked) {
     Mode('train');
     sessionStorage.setItem('mode', 'train');
+
+    document.getElementById('menu').classList.add('train');
+    document.getElementById('navigation').style.color = '#ffffff';
+
 
     for (const key of CARDS) {
       key.classList.add('train');
@@ -101,6 +121,8 @@ document.getElementById('check').addEventListener('click', () => {
       document.getElementById('button').remove();
     }
 
-    document.querySelectorAll('figcaption').forEach((el) => el.style.display = 'flex');
+    document.querySelectorAll('figcaption').forEach(function(e) {
+      e.style.display = 'flex';
+    });
   }
 })
