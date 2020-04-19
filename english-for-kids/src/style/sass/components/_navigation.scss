@@ -8,7 +8,7 @@
   width: 360px;
   height: 100vh;
 
-  background: $color-train;
+  background: $color-play;
 }
 
 .menu {
@@ -26,6 +26,11 @@
 
   transition: transform 0.3s linear;
   z-index: 9;
+}
+
+.menu_active.train,
+.menu.train {
+  background: $color-train;
 }
 
 .navigation {

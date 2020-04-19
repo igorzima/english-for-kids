@@ -1,3 +1,7 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable consistent-return */
+/* eslint-disable func-names */
+/* eslint-disable no-inner-declarations */
 import cards from './cards'
 import createCards from './Card';
 
@@ -7,6 +11,24 @@ const MENU = document.getElementById('menu');
 
 function createMain(arr) {
   let div = '';
+  document.getElementById('stars__wrapper').innerHTML = '';
+  
+  for(let i = 1; i < arr.length; i += 1) {
+    for(let x = 0; x < 1; x += 1) {
+      div += `<div class="main-card"><img src='${arr[i][x].image}' alt=""><span>${arr[0][i-1]}</span></div>`;
+    }
+  }
+
+  document.getElementById('cards').innerHTML = div;
+  const DIV_MAIN = Array.from(document.getElementsByClassName('main-card'));
+  for(let i = 0; i < DIV_MAIN.length; i += 1) {
+    DIV_MAIN[i].dataset.main = i + 1;
+  }
+}
+
+function createMainTrain(arr) {
+  let div = '';
+  document.getElementById('stars__wrapper').innerHTML = '';
   
   for(let i = 1; i < arr.length; i += 1) {
     for(let x = 0; x < 1; x += 1) {
@@ -21,6 +43,13 @@ function createMain(arr) {
   }
 }
 
+function createButton() {
+  const button = document.createElement('button');
+  button.innerText = 'Start game';
+  button.classList.add('button');
+  button.id = 'button';
+  document.querySelector('#main__wrapper').appendChild(button);
+}
 
 
 function cardListener() {
@@ -65,37 +94,169 @@ function cardListener() {
   })
 }
 
+function createStarWin() {
+  const star = `<object type='image/svg+xml' data='./img/star-win.svg' class='star-win'></object>`;
+  document.getElementById('stars__wrapper').insertAdjacentHTML('beforeend', star);
+}
+
+function createStarWrong() {
+  const star = `<object type='image/svg+xml' data='./img/star.svg' class='star-win'></object>`;
+  document.getElementById('stars__wrapper').insertAdjacentHTML('beforeend', star);
+}
 
 
-function mainPage() {
+function startGame() {
+
+  const audio = document.querySelectorAll('audio');
+
+  const r = function makeRandomArr() {
+    return Math.random() - 0.5;
+  }
+
+  const sort = Array.from(audio).sort(r);
+
+  const play = function play() {
+    sort[sort.length - 1].play();
+  }
+
+  function getWinImage() {
+    const failure = `<img src='./img/failure.jpg'></img>`;
+    document.getElementById('button').remove();
+    document.getElementById('cards').innerHTML = failure;
+  }
+
+  function getFailureImage() {
+    const win = `<img src='./img/success.jpg'></img>`;
+    document.getElementById('button').remove();
+    document.getElementById('cards').innerHTML = win;
+  }
+
+  const GAME = document.querySelectorAll('.card');
+
+  let wrong = 0;
+
+  document.getElementById('button').addEventListener('click', () => {
+    if(document.getElementById('button').innerText === 'Start game') {
+      document.getElementById('button').classList.remove('button');
+      document.getElementById('button').classList.add('button_repeat');
+      document.getElementById('button').innerText = 'Repeat';
+  
+      setTimeout(play, 1000);
+    } else {
+      setTimeout(play, 1000);
+    }
+  })
+
+  GAME.forEach(el => {
+    el.addEventListener('click', () => {
+      if(el.querySelector('audio').dataset === sort[sort.length-1].dataset) {
+        createStarWin();
+        sort.pop();
+
+        if(sort.length !== 0) {
+          setTimeout(play, 1000);
+        }
+      } else {
+        createStarWrong();
+        wrong += 1;
+      }
+
+      if(sort.length === 0) {
+        if(wrong > 0) {
+          wrong = 0;
+          setTimeout(getWinImage, 1000);
+
+          setTimeout(() => {
+            createMain(cards);
+            mainPage('play')
+          }, 5000);
+        } else {
+          setTimeout(getFailureImage, 1000);
+
+          setTimeout(() => {
+            createMain(cards);
+            mainPage('play')
+          }, 5000);
+        }
+      }
+    })
+  })
+}
+
+
+function mainPage(mode) {
   const DIV_MAIN = Array.from(document.getElementsByClassName('main-card'));
+
+  if(mode === 'play') {
+    const TRAIN = document.querySelectorAll('.train');
+
+    for (const key of TRAIN) {
+      key.classList.remove('train');
+    }
+  }
 
   DIV_MAIN.forEach((el) => {
     el.addEventListener('click', () => {
+      document.getElementById('cards').classList.add('set');
+      if(mode === 'play') {
+        createButton();
+        startGame();
+      }
+
       switch(el.dataset.main) {
         case  '1':
           createCards(cards[1]);
-          cardListener();
+          if(mode === 'train') {
+            cardListener();
+            if(document.getElementById('button')) {
+              document.getElementById('button').remove();
+            }
+          }
           break;
         case '2':
           createCards(cards[2]);
-          cardListener();
+          if(mode === 'train') {
+            cardListener();
+            if(document.getElementById('button')) {
+              document.getElementById('button').remove();
+            }
+          }
           break;
         case '3':
           createCards(cards[3]);
-          cardListener();
+          if(mode === 'train') {
+            cardListener();
+            if(document.getElementById('button')) {
+              document.getElementById('button').remove();
+            }
+          }
           break;
         case '4':
           createCards(cards[4]);
-          cardListener();
+          if(mode === 'train') {
+            cardListener();
+            if(document.getElementById('button')) {
+              document.getElementById('button').remove();
+            }
+          }
           break;
         case '5':
           createCards(cards[5]);
-          cardListener();
+          if(mode === 'train') {
+            cardListener();
+            if(document.getElementById('button')) {
+              document.getElementById('button').remove();
+            }
+          }
           break;
         case '6':
           createCards(cards[6]);
-          cardListener();
+          if(mode === 'train') {
+            cardListener();
+            if(document.getElementById('button')) {
+              document.getElementById('button').remove();
+            }
+          }
           break;
         default:
           break;
@@ -105,41 +266,17 @@ function mainPage() {
 }
 
 
-function mainPagePlay() {
-  const DIV_MAIN = Array.from(document.getElementsByClassName('main-card'));
 
-  DIV_MAIN.forEach((el) => {
-    el.addEventListener('click', () => {
-      switch(el.dataset.main) {
-        case  '1':
-          createCards(cards[1]);
-          break;
-        case '2':
-          createCards(cards[2]);
-          break;
-        case '3':
-          createCards(cards[3]);
-          break;
-        case '4':
-          createCards(cards[4]);
-          break;
-        case '5':
-          createCards(cards[5]);
-          break;
-        case '6':
-          createCards(cards[6]);
-          break;
-        default:
-          break;
-      }
-    })
-  })
-}
-
-
-
-function navigation() {
+function navigation(mode) {
   const NAVIGATION_LIST = document.querySelectorAll('.navigation__item');
+
+  if(mode === 'play') {
+    const TRAIN = document.querySelectorAll('.train');
+
+    for (const key of TRAIN) {
+      key.classList.remove('train');
+    }
+  }
 
   NAVIGATION_LIST.forEach((el) => {
     el.addEventListener('click', () => {
@@ -147,34 +284,110 @@ function navigation() {
       MENU.classList.add('menu');
       HAMBURGER.classList.remove('hamburger_rotate');
 
+      if(mode === 'play') {
+        if(!document.getElementById('button')) {
+          createButton();
+        }
+        startGame();
+      }
+
       switch(el.dataset.key) {
         case '0':
-          createMain(cards);
-          mainPage();
+          createMainTrain(cards);
+          if(mode === 'play') {
+            mainPage('play');
+          } else {
+            mainPage('train');
+            document.querySelector('.slider').classList.add('train');
+          }
+          if(document.getElementById('button')) {
+            document.getElementById('button').remove();
+          }
+          document.getElementById('cards').classList.remove('set');
           break;
         case  '1':
           createCards(cards[1]);
-          cardListener();
+          if(mode === 'train') {
+            cardListener();
+            if(document.getElementById('button')) {
+              document.getElementById('button').remove();
+            }
+          } else {
+            document.querySelectorAll('figcaption').forEach(function(e) {
+              e.style.display = 'none'
+            });
+          }
+          document.getElementById('cards').classList.add('set');
           break;
         case '2':
           createCards(cards[2]);
-          cardListener();
+          if(mode === 'train') {
+            cardListener();
+            if(document.getElementById('button')) {
+              document.getElementById('button').remove();
+            }
+          } else {
+            document.querySelectorAll('figcaption').forEach(function(e) {
+              e.style.display = 'none'
+            });
+          }
+          document.getElementById('cards').classList.add('set');
           break;
         case '3':
           createCards(cards[3]);
-          cardListener();
+          if(mode === 'train') {
+            cardListener();
+            if(document.getElementById('button')) {
+              document.getElementById('button').remove();
+            }
+          } else {
+            document.querySelectorAll('figcaption').forEach(function(e) {
+              e.style.display = 'none'
+            });
+          }
+          document.getElementById('cards').classList.add('set');
           break;
         case '4':
           createCards(cards[4]);
-          cardListener();
+          if(mode === 'train') {
+            cardListener();
+            if(document.getElementById('button')) {
+              document.getElementById('button').remove();
+            }
+          } else {
+            document.querySelectorAll('figcaption').forEach(function(e) {
+              e.style.display = 'none'
+            });
+          }
+          document.getElementById('cards').classList.add('set');
           break;
         case '5':
           createCards(cards[5]);
-          cardListener();
+          if(mode === 'train') {
+            cardListener();
+            if(document.getElementById('button')) {
+              document.getElementById('button').remove();
+            }
+          } else {
+            document.querySelectorAll('figcaption').forEach(function(e) {
+              e.style.display = 'none'
+            });
+          }
+          document.getElementById('cards').classList.add('set');
           break;
         case '6':
           createCards(cards[6]);
-          cardListener();
+          if(mode === 'train') {
+            cardListener();
+            if(document.getElementById('button')) {
+              document.getElementById('button').remove();
+            }
+          } else {
+            document.querySelectorAll('figcaption').forEach(function(e) {
+              e.style.display = 'none'
+            });
+          }
+          document.getElementById('cards').classList.add('set');
           break;
         default:
           break;
@@ -183,44 +396,4 @@ function navigation() {
   })
 }
 
-function navigationPlay() {
-  const NAVIGATION_LIST = document.querySelectorAll('.navigation__item');
-
-  NAVIGATION_LIST.forEach((el) => {
-    el.addEventListener('click', () => {
-      MENU.classList.remove('menu_active');
-      MENU.classList.add('menu');
-      HAMBURGER.classList.remove('hamburger_rotate');
-
-      switch(el.dataset.key) {
-        case '0':
-          createMain(cards);
-          mainPagePlay();
-          break;
-        case  '1':
-          createCards(cards[1]);
-          break;
-        case '2':
-          createCards(cards[2]);
-          break;
-        case '3':
-          createCards(cards[3]);
-          break;
-        case '4':
-          createCards(cards[4]);
-          break;
-        case '5':
-          createCards(cards[5]);
-          break;
-        case '6':
-          createCards(cards[6]);
-          break;
-        default:
-          break;
-      }
-    })
-  })
-}
-
-
-export {cardListener, mainPage, navigation, createMain, mainPagePlay, navigationPlay};
+export {cardListener, mainPage, navigation, createMain, createButton, startGame, createMainTrain};

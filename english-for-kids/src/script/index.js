@@ -1,8 +1,9 @@
-import '../style/style.css';
+/* eslint-disable no-restricted-syntax */
+// import '../style/style.css';
 import '../style/sass/style.scss';
 import cards from './cards';
 // import createCards from './Card';
-import { createMain } from './Functions';
+import { createMainTrain, createButton, startGame, } from './Functions';
 import Mode from './Mode';
 
 
@@ -15,10 +16,17 @@ const NAVIGATION = document.getElementById('navigation');
 HAMBURGER.addEventListener('click', () => {
   if (MENU.classList.contains('menu')) {
     MENU.classList.remove('menu');
+    if (document.querySelector('input').checked) {
+      MENU.classList.add('menu_active', 'train');
+    }
     MENU.classList.add('menu_active');
     HAMBURGER.classList.add('hamburger_rotate');
   } else {
-    MENU.classList.remove('menu_active');
+    if (document.querySelector('input').checked) {
+      MENU.classList.remove('menu_active');
+    } else {
+      MENU.classList.remove('menu_active', 'train');
+    }
     MENU.classList.add('menu');
     HAMBURGER.classList.remove('hamburger_rotate');
   }
@@ -42,53 +50,57 @@ function createNavigation(arr) {
 }
 
 
-
-createMain(cards);
+createMainTrain(cards);
 
 createNavigation(cards);
 
-Mode('train');
-
-
-
+if(sessionStorage.mode === undefined || sessionStorage.mode === 'train') {
+  Mode('train');
+  document.querySelector('input').setAttribute('checked', 'checked');
+  sessionStorage.setItem('mode', 'train');
+} else if(sessionStorage.mode === 'play') {
+  Mode('play');
+  document.querySelector('input').removeAttribute('checked');
+  sessionStorage.setItem('mode', 'play');
+}
 
 
 document.getElementById('check').addEventListener('click', () => {
+  document.querySelector('.slider').classList.add('train');
+  const CARDS = document.querySelectorAll('.main-card');
+
   if(!(document.querySelector('input').checked)) {
     Mode('play');
-    // console.log(document.querySelector('input').checked)
-    // const button = document.createElement('button');
-    // button.innerText = 'Hello';
-    // document.querySelector('#main__wrapper').appendChild(button);
+    sessionStorage.setItem('mode', 'play');
 
-    // const audio = document.querySelectorAll('audio');
+    if (document.querySelector('#cards').classList.contains('set')) {
+      if(!document.getElementById('button')) {
+        createButton();
+      }
+      startGame();
+    }
 
-    // const r = function makeRandomArr() {
-    //   return Math.random() - 0.5;
-    // }
-    // const sort = Array.from(audio).sort(r);
+    const TRAIN = document.querySelectorAll('.train');
 
-    // const play = function play() {
-    //   sort[sort.length - 1].play();
-    // }
+    for (const key of TRAIN) {
+      key.classList.remove('train');
+    }
 
-    // setTimeout(play, 2000);
-
-
-
-    // const GAME = document.querySelectorAll('figure');
-
-    // GAME.forEach(el => {
-    //   el.addEventListener('click', () => {
-    //     if(el.querySelector('audio').dataset === sort[sort.length-1].dataset) {
-    //       setTimeout(play, 2000);
-    //       sort.pop()
-    //     }
-
-    //   })
-    // })
+    document.querySelectorAll('figcaption').forEach((el) => el.style.display = 'none');
   } else if (document.querySelector('input').checked) {
     Mode('train');
+    sessionStorage.setItem('mode', 'train');
+
+    for (const key of CARDS) {
+      key.classList.add('train');
+    }
+
+    document.getElementById('stars__wrapper').innerHTML = '';
+
+    if(document.getElementById('button')) {
+      document.getElementById('button').remove();
+    }
+
+    document.querySelectorAll('figcaption').forEach((el) => el.style.display = 'flex');
   }
 })
-

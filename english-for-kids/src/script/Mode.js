@@ -1,18 +1,17 @@
 // import cards from './cards';
-import {cardListener, mainPage, navigation, createMain, mainPagePlay, navigationPlay} from './Functions';
+import {cardListener, mainPage, navigation} from './Functions';
+
+
 
 function Mode(mode) {
   if(mode === 'train') {
-    // createMain(cards);
-    mainPage();
+    mainPage('train');
     cardListener();
-    navigation();
+    navigation('train');
   } else if(mode === 'play') {
-    // mainPagePlay();
-    navigationPlay();
-    // cardListener();
+    mainPage('play');
+    navigation('play');
   }
-
 }
 
 export default Mode;
