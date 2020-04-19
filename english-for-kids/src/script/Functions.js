@@ -118,6 +118,38 @@ function startGame() {
     document.getElementById('cards').innerHTML = win;
   }
 
+  const error = document.createElement('audio');
+  error.src = `./audio/error.mp3`;
+  document.getElementById('cards').insertAdjacentElement('beforeend', error);
+
+  const correct = document.createElement('audio');
+  correct.src = `./audio/correct.mp3`;
+  document.getElementById('cards').insertAdjacentElement('beforeend', correct);
+
+  const success = document.createElement('audio');
+  success.src = `./audio/success.mp3`;
+  document.getElementById('cards').insertAdjacentElement('beforeend', success);
+
+  const failure = document.createElement('audio');
+  failure.src = `./audio/failure.mp3`;
+  document.getElementById('cards').insertAdjacentElement('beforeend', failure);
+
+  function correctSound() {
+    correct.play();
+  }
+
+  function errorSound() {
+    error.play();
+  }
+
+  function successSound() {
+    success.play();
+  }
+
+  function failureSound() {
+    failure.play();
+  }
+
   const GAME = document.querySelectorAll('.card');
 
   let wrong = 0;
@@ -141,16 +173,19 @@ function startGame() {
         sort.pop();
 
         if(sort.length !== 0) {
+          correctSound();
+
           setTimeout(play, 1000);
         }
       } else {
         createStarWrong();
+        errorSound();
         wrong += 1;
       }
 
       if(sort.length === 0) {
         if(wrong > 0) {
-          wrong = 0;
+          failureSound();
           setTimeout(getWinImage, 1000);
 
           setTimeout(() => {
@@ -158,6 +193,7 @@ function startGame() {
             mainPage('play')
           }, 5000);
         } else {
+          successSound();
           setTimeout(getFailureImage, 1000);
 
           setTimeout(() => {
