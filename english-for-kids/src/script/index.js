@@ -51,14 +51,16 @@ function createNavigation(arr) {
 NAVIGATION.addEventListener('click', (event) => {
   const NAVIGATION_LIST = document.querySelectorAll('.navigation__item');
 
-  if(document.querySelector('input').checked) {
-    NAVIGATION_LIST.forEach(el => el.classList.remove('active'));
-    NAVIGATION_LIST.forEach(el => el.classList.remove('active_play'));
-    event.target.classList.add('active')
-  } else {
-    NAVIGATION_LIST.forEach(el => el.classList.remove('active'));
-    NAVIGATION_LIST.forEach(el => el.classList.remove('active_play'));
-    event.target.classList.add('active_play');
+  if(event.target !== NAVIGATION) {
+    if(document.querySelector('input').checked) {
+      NAVIGATION_LIST.forEach(el => el.classList.remove('active'));
+      NAVIGATION_LIST.forEach(el => el.classList.remove('active_play'));
+      event.target.classList.add('active')
+    } else {
+      NAVIGATION_LIST.forEach(el => el.classList.remove('active'));
+      NAVIGATION_LIST.forEach(el => el.classList.remove('active_play'));
+      event.target.classList.add('active_play');
+    }
   }
 })
 

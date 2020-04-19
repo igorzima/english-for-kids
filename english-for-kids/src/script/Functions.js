@@ -106,16 +106,21 @@ function startGame() {
     sort[sort.length - 1].play();
   }
 
+  let wrong = 0;
+
   function getWinImage() {
-    const failure = `<img src='./img/failure.jpg'></img>`;
+    const failure = `<img src='./img/success.jpg'></img>`;
     document.getElementById('button').remove();
     document.getElementById('cards').innerHTML = failure;
   }
 
   function getFailureImage() {
-    const win = `<img src='./img/success.jpg'></img>`;
+    const win = `<img src='./img/failure.jpg'></img>`;
     document.getElementById('button').remove();
+    const score = document.createElement('p');
+    score.innerText = `You have ${wrong} mistake`;
     document.getElementById('cards').innerHTML = win;
+    document.getElementById('cards').insertAdjacentElement('beforeend', score);
   }
 
   const error = document.createElement('audio');
@@ -152,8 +157,6 @@ function startGame() {
 
   const GAME = document.querySelectorAll('.card');
 
-  let wrong = 0;
-
   document.getElementById('button').addEventListener('click', () => {
     if(document.getElementById('button').innerText === 'Start game') {
       document.getElementById('button').classList.remove('button');
@@ -186,19 +189,19 @@ function startGame() {
       if(sort.length === 0) {
         if(wrong > 0) {
           failureSound();
-          setTimeout(getWinImage, 1000);
-
-          setTimeout(() => {
-            createMain(cards, 'play');
-            mainPage('play')
-          }, 5000);
-        } else {
-          successSound();
           setTimeout(getFailureImage, 1000);
 
           setTimeout(() => {
             createMain(cards, 'play');
-            mainPage('play')
+            mainPage('play');
+          }, 5000);
+        } else {
+          successSound();
+          setTimeout(getWinImage, 1000);
+
+          setTimeout(() => {
+            createMain(cards, 'play');
+            mainPage('play');
           }, 5000);
         }
       }
