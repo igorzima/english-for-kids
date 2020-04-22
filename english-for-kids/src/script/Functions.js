@@ -94,7 +94,7 @@ function createStarWrong() {
 
 
 function startGame() {
-  const audio = document.querySelectorAll('audio');
+  const audio = document.getElementsByTagName('audio');
 
   const r = function makeRandomArr() {
     return Math.random() - 0.5;
@@ -167,44 +167,44 @@ function startGame() {
     } else {
       setTimeout(play, 1000);
     }
-  })
 
-  GAME.forEach(el => {
-    el.addEventListener('click', () => {
-      if(el.querySelector('audio').dataset === sort[sort.length-1].dataset) {
-        createStarWin();
-        sort.pop();
-
-        if(sort.length !== 0) {
-          correctSound();
-
-          setTimeout(play, 1000);
-        }
-      } else {
-        createStarWrong();
-        errorSound();
-        wrong += 1;
-      }
-
-      if(sort.length === 0) {
-        if(wrong > 0) {
-          failureSound();
-          setTimeout(getFailureImage, 1000);
-
-          setTimeout(() => {
-            createMain(cards, 'play');
-            mainPage('play');
-          }, 5000);
+    GAME.forEach(el => {
+      el.addEventListener('click', () => {
+        if(el.querySelector('audio').dataset === sort[sort.length-1].dataset) {
+          createStarWin();
+          sort.pop();
+  
+          if(sort.length !== 0) {
+            correctSound();
+  
+            setTimeout(play, 1000);
+          }
         } else {
-          successSound();
-          setTimeout(getWinImage, 1000);
-
-          setTimeout(() => {
-            createMain(cards, 'play');
-            mainPage('play');
-          }, 5000);
+          createStarWrong();
+          errorSound();
+          wrong += 1;
         }
-      }
+  
+        if(sort.length === 0) {
+          if(wrong > 0) {
+            failureSound();
+            setTimeout(getFailureImage, 1000);
+  
+            setTimeout(() => {
+              createMain(cards, 'play');
+              mainPage('play');
+            }, 5000);
+          } else {
+            successSound();
+            setTimeout(getWinImage, 1000);
+  
+            setTimeout(() => {
+              createMain(cards, 'play');
+              mainPage('play');
+            }, 5000);
+          }
+        }
+      })
     })
   })
 }
@@ -226,7 +226,7 @@ function mainPage(mode) {
       document.getElementById('cards').classList.add('set');
       if(mode === 'play') {
         createButton();
-        startGame();
+        // startGame();
       }
 
       switch(el.dataset.main) {
@@ -238,9 +238,14 @@ function mainPage(mode) {
               document.getElementById('button').remove();
             }
           } else {
+            const CARDS = document.querySelectorAll('.card__image');
+            for (const key of CARDS) {
+              key.style.height = 'inherit';
+            }
             document.querySelectorAll('figcaption').forEach(function(e) {
               e.style.display = 'none'
             });
+            startGame();
           }
           break;
         case '2':
@@ -251,9 +256,15 @@ function mainPage(mode) {
               document.getElementById('button').remove();
             }
           } else {
+            const CARDS = document.querySelectorAll('.card__image');
+            for (const key of CARDS) {
+              key.style.height = 'inherit';
+            }
+
             document.querySelectorAll('figcaption').forEach(function(e) {
               e.style.display = 'none'
             });
+            startGame();
           }
           break;
         case '3':
@@ -264,9 +275,15 @@ function mainPage(mode) {
               document.getElementById('button').remove();
             }
           } else {
+            const CARDS = document.querySelectorAll('.card__image');
+            for (const key of CARDS) {
+              key.style.height = 'inherit';
+            }
+
             document.querySelectorAll('figcaption').forEach(function(e) {
               e.style.display = 'none'
             });
+            startGame();
           }
           break;
         case '4':
@@ -277,9 +294,15 @@ function mainPage(mode) {
               document.getElementById('button').remove();
             }
           } else {
+            const CARDS = document.querySelectorAll('.card__image');
+            for (const key of CARDS) {
+              key.style.height = 'inherit';
+            }
+
             document.querySelectorAll('figcaption').forEach(function(e) {
               e.style.display = 'none'
             });
+            startGame();
           }
           break;
         case '5':
@@ -290,9 +313,15 @@ function mainPage(mode) {
               document.getElementById('button').remove();
             }
           } else {
+            const CARDS = document.querySelectorAll('.card__image');
+            for (const key of CARDS) {
+              key.style.height = 'inherit';
+            }
+
             document.querySelectorAll('figcaption').forEach(function(e) {
               e.style.display = 'none'
             });
+            startGame();
           }
           break;
         case '6':
@@ -303,9 +332,15 @@ function mainPage(mode) {
               document.getElementById('button').remove();
             }
           } else {
+            const CARDS = document.querySelectorAll('.card__image');
+            for (const key of CARDS) {
+              key.style.height = 'inherit';
+            }
+
             document.querySelectorAll('figcaption').forEach(function(e) {
               e.style.display = 'none'
             });
+            startGame();
           }
           break;
         case '7':
@@ -316,9 +351,15 @@ function mainPage(mode) {
               document.getElementById('button').remove();
             }
           } else {
+            const CARDS = document.querySelectorAll('.card__image');
+            for (const key of CARDS) {
+              key.style.height = 'inherit';
+            }
+
             document.querySelectorAll('figcaption').forEach(function(e) {
               e.style.display = 'none'
             });
+            startGame();
           }
           break;
         case '8':
@@ -329,9 +370,15 @@ function mainPage(mode) {
               document.getElementById('button').remove();
             }
           } else {
+            const CARDS = document.querySelectorAll('.card__image');
+            for (const key of CARDS) {
+              key.style.height = 'inherit';
+            }
+
             document.querySelectorAll('figcaption').forEach(function(e) {
               e.style.display = 'none'
             });
+            startGame();
           }
           break;
         default:
@@ -361,10 +408,11 @@ function navigation(mode) {
       HAMBURGER.classList.remove('hamburger_rotate');
 
       if(mode === 'play') {
-        if(!document.getElementById('button')) {
-          createButton();
+        if(document.getElementById('button')) {
+          document.getElementById('button').remove()
         }
-        startGame();
+        document.getElementById('stars__wrapper').innerHTML = '';
+        createButton();
       }
 
       switch(el.dataset.key) {
@@ -375,6 +423,7 @@ function navigation(mode) {
           } else {
             mainPage('train');
             document.querySelector('.slider').classList.add('train');
+            document.getElementById('menu').classList.add('train');
           }
           if(document.getElementById('button')) {
             document.getElementById('button').remove();
@@ -389,9 +438,15 @@ function navigation(mode) {
               document.getElementById('button').remove();
             }
           } else {
+            const CARDS = document.querySelectorAll('.card__image');
+            for (const key of CARDS) {
+              key.style.height = 'inherit';
+            }
+
             document.querySelectorAll('figcaption').forEach(function(e) {
               e.style.display = 'none'
             });
+            startGame();
           }
           document.getElementById('cards').classList.add('set');
           break;
@@ -403,9 +458,15 @@ function navigation(mode) {
               document.getElementById('button').remove();
             }
           } else {
+            const CARDS = document.querySelectorAll('.card__image');
+            for (const key of CARDS) {
+              key.style.height = 'inherit';
+            }
+
             document.querySelectorAll('figcaption').forEach(function(e) {
               e.style.display = 'none'
             });
+            startGame();
           }
           document.getElementById('cards').classList.add('set');
           break;
@@ -417,9 +478,15 @@ function navigation(mode) {
               document.getElementById('button').remove();
             }
           } else {
+            const CARDS = document.querySelectorAll('.card__image');
+            for (const key of CARDS) {
+              key.style.height = 'inherit';
+            }
+
             document.querySelectorAll('figcaption').forEach(function(e) {
               e.style.display = 'none'
             });
+            startGame();
           }
           document.getElementById('cards').classList.add('set');
           break;
@@ -431,9 +498,15 @@ function navigation(mode) {
               document.getElementById('button').remove();
             }
           } else {
+            const CARDS = document.querySelectorAll('.card__image');
+            for (const key of CARDS) {
+              key.style.height = 'inherit';
+            }
+
             document.querySelectorAll('figcaption').forEach(function(e) {
               e.style.display = 'none'
             });
+            startGame();
           }
           document.getElementById('cards').classList.add('set');
           break;
@@ -445,9 +518,15 @@ function navigation(mode) {
               document.getElementById('button').remove();
             }
           } else {
+            const CARDS = document.querySelectorAll('.card__image');
+            for (const key of CARDS) {
+              key.style.height = 'inherit';
+            }
+
             document.querySelectorAll('figcaption').forEach(function(e) {
               e.style.display = 'none'
             });
+            startGame();
           }
           document.getElementById('cards').classList.add('set');
           break;
@@ -459,9 +538,15 @@ function navigation(mode) {
               document.getElementById('button').remove();
             }
           } else {
+            const CARDS = document.querySelectorAll('.card__image');
+            for (const key of CARDS) {
+              key.style.height = 'inherit';
+            }
+
             document.querySelectorAll('figcaption').forEach(function(e) {
               e.style.display = 'none';
             });
+            startGame();
           }
           document.getElementById('cards').classList.add('set');
           break;
@@ -473,9 +558,15 @@ function navigation(mode) {
               document.getElementById('button').remove();
             }
           } else {
+            const CARDS = document.querySelectorAll('.card__image');
+            for (const key of CARDS) {
+              key.style.height = 'inherit';
+            }
+
             document.querySelectorAll('figcaption').forEach(function(e) {
               e.style.display = 'none'
             });
+            startGame();
           }
           document.getElementById('cards').classList.add('set');
           break;
@@ -487,9 +578,15 @@ function navigation(mode) {
             document.getElementById('button').remove();
           }
         } else {
+          const CARDS = document.querySelectorAll('.card__image');
+          for (const key of CARDS) {
+            key.style.height = 'inherit';
+          }
+
           document.querySelectorAll('figcaption').forEach(function(e) {
             e.style.display = 'none'
           });
+          startGame();
         }
         document.getElementById('cards').classList.add('set');
         break;

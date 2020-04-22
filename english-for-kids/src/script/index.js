@@ -2,7 +2,7 @@
 // import '../style/style.css';
 import '../style/sass/style.scss';
 import cards from './cards';
-import { createMain, createButton, startGame } from './Functions';
+import { createMain, createButton, startGame, cardListener } from './Functions';
 import Mode from './Mode';
 
 
@@ -82,12 +82,17 @@ if(sessionStorage.mode === undefined || sessionStorage.mode === 'train') {
 
 document.getElementById('check').addEventListener('click', () => {
   document.querySelector('.slider').classList.add('train');
-  const CARDS = document.querySelectorAll('.main-card');
+  const MAINCARDS = document.querySelectorAll('.main-card');
+  const CARDS = document.querySelectorAll('.card__image');
 
   if(!(document.querySelector('input').checked)) {
     Mode('play');
     sessionStorage.setItem('mode', 'play');
     document.getElementById('navigation').style.color = '#000000';
+
+    for (const key of CARDS) {
+      key.style.height = 'inherit';
+    }
 
     if (document.querySelector('#cards').classList.contains('set')) {
       if(!document.getElementById('button')) {
@@ -107,13 +112,18 @@ document.getElementById('check').addEventListener('click', () => {
     });
   } else if (document.querySelector('input').checked) {
     Mode('train');
+    cardListener();
     sessionStorage.setItem('mode', 'train');
+
+    for (const key of CARDS) {
+      key.style.height = 'auto';
+    }
 
     document.getElementById('menu').classList.add('train');
     document.getElementById('navigation').style.color = '#ffffff';
 
 
-    for (const key of CARDS) {
+    for (const key of MAINCARDS) {
       key.classList.add('train');
     }
 

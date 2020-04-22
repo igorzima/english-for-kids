@@ -1,10 +1,10 @@
 .cards__layout {
   display: grid;
   justify-content: space-between;
-  grid-row-gap: 100px;
+  grid-row-gap: 50px;
   grid-template-areas: 'a a a a';
   perspective: 1000px;
-  margin-bottom: 85px;
+  margin-bottom: 55px;
 
   @media (max-width: 1200px) {
     grid-template-areas: 'a a a';

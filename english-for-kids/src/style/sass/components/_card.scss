@@ -1,25 +1,31 @@
 .card {
-  height: 200px;
+  height: 245px;
   width: 300px;
   position: relative;
   transition: all 750ms ease-out;
   transform-style: preserve-3d;
+  cursor: pointer;
 }
 
 figure {
   backface-visibility: hidden;
-  height: 100%;
   margin: 0 0;
   position: absolute;
-  width: 100%;
   transform: rotateY(0deg);
   z-index: 2;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,.4);
+  transition: all 0.3s ease-in-out;
+  height: inherit;
+
+  &:hover {
+    box-shadow: 0 1px 21px 5px rgba(0,0,0,.4);
+  }
 
   .card__image {
     width: 300px;
+    transition: all 0.3s ease-in-out;
   }
 
   .card__word {
@@ -31,11 +37,13 @@ figure {
 
     .icon {
       width: 20px;
+      margin-right: 10px;
       cursor: pointer;
     }
 
     span {
       width: 20px;
+      margin-left: 10px;
     }
   }
 }

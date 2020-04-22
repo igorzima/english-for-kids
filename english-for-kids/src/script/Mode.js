@@ -1,11 +1,11 @@
-import {cardListener, mainPage, navigation} from './Functions';
+import {/* cardListener, */ mainPage, navigation} from './Functions';
 
 
 
 function Mode(mode) {
   if(mode === 'train') {
     mainPage('train');
-    cardListener();
+    // cardListener();
     navigation('train');
   } else if(mode === 'play') {
     mainPage('play');
