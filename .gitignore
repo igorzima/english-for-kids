@@ -1,9 +1,3 @@
 dist
 node_modules
-.babelrc
-.eslintignore
-.eslintrc.js
-package.json
 package-lock.json
-postcss.config.js
-webpack.config.js

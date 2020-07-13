@@ -3,7 +3,7 @@
 /* eslint-disable func-names */
 /* eslint-disable no-inner-declarations */
 import cards from './cards'
-import createCards from './Card';
+import createCards from './createCards';
 
 const HAMBURGER = document.getElementById('hamburger');
 const MENU = document.getElementById('menu');
@@ -192,6 +192,7 @@ function startGame() {
   
             setTimeout(() => {
               createMain(cards, 'play');
+              // eslint-disable-next-line no-use-before-define
               mainPage('play');
             }, 5000);
           } else {
@@ -200,6 +201,7 @@ function startGame() {
   
             setTimeout(() => {
               createMain(cards, 'play');
+              // eslint-disable-next-line no-use-before-define
               mainPage('play');
             }, 5000);
           }
